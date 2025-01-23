@@ -28,10 +28,14 @@ app.use(express.json());
 
 const sessions = new Set(); // jo users isme h they can generate new tokens
 
-app.get("/admin", (req, res) => {
-  // only for testing purpose
-  res.json(users);
-});
+// app.get("/admin", (req, res) => {
+//   // only for testing purpose
+//   res.json(users);
+// });
+
+app.get("/profile", async(req,res) => {
+  // Get the user name from                                 
+})
 
 app.post("/register", async (req, res) => {
   try {
@@ -105,9 +109,12 @@ app.post("/login", async (req, res) => {
     return res.status(500).json({ message: "Internal serer error!" });
   }
 
-  const userInfo = { username: user.username };
+  // const userInfo = { username: user.username };
+
   // console.log(userInfo);
-  const token_data = { user: userInfo };
+  // const token_data = { user: userInfo };
+  const token_data = { id: user._id };
+
 
   const refresh_token = jwt.sign(token_data, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "20s",

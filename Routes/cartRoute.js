@@ -1,22 +1,27 @@
 const {
-  createNewCart,
+  // createNewCart,
   getCart,
-  addToCart,
-  updateQuantityOfCartItem,
+  addtoCart,
+  // updateQuantityOfCartItem,
   removeFromCart,
 } = require("../controllers/cartController");
+const verifyUser = require("../Middlewares/authMiddleware");
+const router = require("express").Router();
+
 
 // creating a new cart with the userId
-app.post("/cart", createNewCart);
+// router.post("/cart",verifyUser ,createNewCart);
 
 // to view the cart
-app.get("/cart", getCart);
+router.get("/cart",verifyUser, getCart);
 
 // add Item to the cart or update its quantity if it is already present
-app.post("/cart", addToCart);
+router.post("/cart", addtoCart);
 
 // update the quantity of the cart
-app.put("/cart/:productId", updateQuantityOfCartItem);
+// router.put("/cart/:productId", updateQuantityOfCartItem);
 
 // remove item from the cart
-app.delete("/cart/:productId", removeFromCart);
+router.delete("/cart/:productId", removeFromCart);
+
+module.exports = router;
